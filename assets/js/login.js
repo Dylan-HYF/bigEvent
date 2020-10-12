@@ -1,5 +1,4 @@
 $(function () {
-    const baseUrl = 'http://ajax.frontend.itheima.net';
     const { form, layer } = layui; //这条代码相当于: const form = layui.form; const layer = layui.layer;
     //切换登录和注册界面
     $('#link_reg').on('click', function () {
@@ -24,7 +23,7 @@ $(function () {
     $('#register').on('submit', function (e) {
         e.preventDefault();
         $.ajax({
-            url: baseUrl + '/api/reguser',
+            url: '/api/reguser',
             method: 'POST',
             data: {
                 username: $('.reg [name = username]').val(),
@@ -47,12 +46,14 @@ $(function () {
     $('#log').submit(function (e) {
         e.preventDefault();
         $.ajax({
-            url: baseUrl + '/api/login',
+            url: '/api/login',
             method: 'POST',
             data: $(this).serialize(), //serialize方法获取表单信息
             success(res) {
                 if (res.status !== 0) {
                     layer.msg(res.message || '登录失败');
+                    //必须写return,不然代码还会继续往下走
+                    return;
                 }
                 layer.msg('登录成功');
                 //保存一下token
