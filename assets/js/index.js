@@ -38,6 +38,7 @@ function renderAvatar(user) {
         //渲染头像图片
         $('.layui-nav-img').attr('src', user.user_pic).show();
         $('.text-avatar').hide();
+        //这里必须写else,不然的话下面的代码无论如何都会执行,哪怕我上面有头像图片也会被下面的代码又覆盖掉
     } else {
         $('.layui-nav-img').hide();
         let first = name[0].toUpperCase();
